@@ -1,0 +1,61 @@
+body {
+    text-align: center;
+    background-color: chocolate;
+}
+
+#imagecss {
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+    width: 30%;
+}
+
+#headerSection {
+    padding: 5px;
+}
+
+#headerSection h1 {
+    font-family: cursive;
+}
+
+input {
+    padding: 10px;
+    border-radius: 5px;
+    width: 80%; /* Adjust width for smaller screens */
+    max-width: 300px; /* Maximum width for larger screens */
+    margin-bottom: 10px;
+}
+
+#dropbox {
+    padding: 10px;
+    border-radius: 5px;
+    width: 50%; /* Adjust width for smaller screens */
+    max-width: 150px; /* Maximum width for larger screens */
+}
+
+#loginbtn {
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 5px;
+    background-color: gold;
+    color: white;
+    width: 50%; /* Adjust width for smaller screens */
+    max-width: 150px; /* Maximum width for larger screens */
+}
+
+#registerLink {
+    transition: transform 0.3s ease-in-out;
+}
+
+#registerLink:hover {
+    transform: translateY(-5px);
+}
+
+/* Media Query for smaller screens */
+@media screen and (max-width: 768px) {
+    input, #dropbox, #loginbtn {
+        width: 100%; /* Set width to 100% for smaller screens */
+        max-width: none; /* Remove maximum width for smaller screens */
+    }
+}
+

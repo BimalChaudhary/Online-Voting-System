@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Voting System - Register</title>
+    <link rel="stylesheet" href="../CSS/stylesheet.css">
+    <style>
+        /* Your existing CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #bodysection {
+            background: whitesmoke;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        #selectedRole {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        #imagepart {
+            width: 100%;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        #imageInput {
+            width: calc(100% - 110px); /* Adjust according to the width of the label and button */
+            padding: 5px;
+            margin-right: 10px;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: gold;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: darkgoldenrod;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <center>
+    <div id="bodysection">
+    <h1>Online Voting System</h1>
+    <hr>
+    <h3>Registration</h3>
+    <form id="registrationForm" action="../api/register.php" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+        <input type="text" name="name" placeholder="Enter your Name (max 20 characters)" maxlength="20" autocomplete="off" >
+
+        <input type="text" name="mobile" placeholder="Enter your Mobile  Number (10 digits)" pattern="[0-9]{10}" 
+        title="ID Number must be 10 digits" required oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);" autocomplete="off">
+
+        <br><br>
+        <input type="password" name="password" id="password" placeholder="Password (4 digits)" maxlength="4" autocomplete="off">
+        <input type="checkbox" id="showPassword" onclick="togglePassword()">
+        <label for="showPassword">Show Password</label>
+        
+        <input type="password" name="cpassword" placeholder="Confirm Password (4 digits)" maxlength="4">
+        <br><br>
+        <input id="address" type="text" name="address" placeholder="Address (max 10 characters)" maxlength="10">
+        <br><br>
+        <div id="imagepart">
+            Upload Image: <input id="imageInput" type="file" name="photo">
+        </div>
+        <br>
+        <div >
+            Select your role :<select name="role" id="selectedRole">
+               <option value="1">Voter</option>
+               <option value="2">Group</option>
+           </select>
+           </div>
+        <br><br>
+        <button type="submit">Register</button>
+
+        Already a user? <a href="../index.html">Login here</a>
+    </form>
+    </div>
+    </center>
+
+    <script>
+        function togglePassword() {
+            var passwordField = document.getElementById("password");
+            var checkbox = document.getElementById("showPassword");
+            
+            if (checkbox.checked) {
+                passwordField.type = "text";
+            } else {
+                passwordField.type = "password";
+            }
+        }
+
+        function validateForm() {
+            var name = document.getElementsByName('name')[0].value.trim();
+            var mobile = document.getElementsByName('mobile')[0].value.trim();
+            var password = document.getElementsByName('password')[0].value.trim();
+            var confirmPassword = document.getElementsByName('cpassword')[0].value.trim();
+            var address = document.getElementsByName('address')[0].value.trim();
+            var image = document.getElementById('imageInput').value.trim();
+            var role = document.getElementById('selectedRole').value.trim();
+
+            if (name === '') {
+                alert('Name cannot be empty.');
+                return false;
+            } else if (name.length > 20) {
+                alert('Name must be 20 characters or less.');
+                return false;
+            }
+
+            if (mobile === '') {
+                alert('ID Number cannot be empty.');
+                return false;
+            } else if (!/^\d{10}$/.test(mobile)) {
+                alert('ID Number must be 10 digits.');
+                return false;
+            }
+
+            if (password === '' || password.length !== 4) {
+                alert('Password must be 4 digits.');
+                return false;
+            }
+
+            if (confirmPassword === '' || confirmPassword.length !== 4) {
+                alert('Confirm Password must be 4 digits.');
+                return false;
+            }
+
+            if (address === '' || address.length > 10) {
+                alert('Address cannot be empty and must be 10 characters or less.');
+                return false;
+            }
+
+            if (image === '') {
+                alert('Please upload an image.');
+                return false;
+            }
+
+            if (role === '') {
+                alert('Please select a role.');
+                return false;
+            }
+                
+        }
+    </script>
+</body>
+</html>

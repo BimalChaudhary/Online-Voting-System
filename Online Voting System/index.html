@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Voting System - Home</title>
+    <link rel="stylesheet" href="CSS/stylesheet.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #bodySection {
+            background-color: white;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        #loginbtn {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #loginbtn:hover {
+            background-color: #0056b3;
+        }
+
+        #forgot-password-link,
+        #register-link {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        #forgot-password-link:hover,
+        #register-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        function togglePassword() {
+            var passwordField = document.getElementById("password");
+            var showPasswordCheckbox = document.getElementById("showPassword");
+            if (showPasswordCheckbox.checked) {
+                passwordField.type = "text";
+            } else {
+                passwordField.type = "password";
+            }
+        }
+
+        function validateForm() {
+            // Add your validation logic here if needed
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <center>
+    <div id="headerSection">
+        <h1>Online Voting System</h1>
+    </div>
+    <hr>
+    <div id="bodySection">
+        <form action="api/login.php" method="POST" onsubmit="return validateForm()">
+            <h2>Login</h2> 
+            <input type="text" name="mobile" placeholder="Enter your Mobile Number (10 digits)" pattern="[0-9]{10}" 
+            title="ID Number must be 10 digits" required oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);" autocomplete="off">
+            <br><br>
+            <input type="password" id="password" name="password" placeholder="Password (4 digits)" maxlength="4" autocomplete="off">
+            <input type="checkbox" id="showPassword" onclick="togglePassword()">
+            <label for="showPassword">Show Password</label>
+            <br><br>
+            <div id="role">Select your role :  
+               <select name="role" id="dropbox">
+                <option value="1">Voter</option>
+                <option value="2">Group</option>
+                <option value="3">Admin</option>
+            </select>
+            </div>
+            <br><br>
+            <button id="loginbtn" type="submit">Login</button><br><br>
+            <label for="chk">
+              <a href="routes/forgetPassword.html" id="forgot-password-link"><b>Forgot Password?</b></a>
+            </label><br><br>
+            New User ?<br><a href="routes/register.html" id="register-link"><b>Register here</b></a>
+        </form>
+    </div>
+   </center>
+</body>
+</html>
